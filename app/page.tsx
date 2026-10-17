@@ -306,8 +306,12 @@ export default function Home() {
               มหาชัย · สมุทรสาคร
             </p>
             <h1 className="text-display font-semibold">
-              โกดัง โรงงาน ให้เช่า
-              <span className="block text-[#7cc4ee]">ฐานที่มั่นคงให้ธุรกิจ SME เติบโต</span>
+              <span className="whitespace-nowrap">โกดัง</span> <span className="whitespace-nowrap">โรงงาน</span>{" "}
+              <span className="whitespace-nowrap">ให้เช่า</span>
+              <span className="block text-[#7cc4ee]">
+                <span className="whitespace-nowrap">ฐานที่มั่นคง</span>{" "}
+                <span className="whitespace-nowrap">ให้ธุรกิจ SME เติบโต</span>
+              </span>
             </h1>
             <p className="mt-5 max-w-xl text-lead text-white/80">
               พื้นที่พร้อมใช้ตั้งแต่ 20–2,000 ตร.ม. ทำเลติดถนนหลัก ใกล้กรุงเทพฯ ดูแลความปลอดภัย 24 ชั่วโมง
@@ -540,7 +544,7 @@ export default function Home() {
             </span>
             <span>FWM Future Mark Industrial Park</span>
           </div>
-          <p>© {new Date().getFullYear()} {CONTACT.company}</p>
+          <p>© 2026 {CONTACT.company}</p>
         </div>
       </footer>
 
