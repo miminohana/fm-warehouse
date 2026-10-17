@@ -138,6 +138,11 @@ export const content = {
     },
     stickyCall: "โทรสอบถาม",
     logoAlt: "โลโก้ Future Mark Industrial Park",
+    mascot: {
+      label: "น้องกล่อง มาสคอตของ FWM",
+      hello: "สวัสดีครับ! ผม “น้องกล่อง” ยินดีต้อนรับสู่ FWM",
+      call: "มีคำถาม โทรหาเราได้เลยครับ!",
+    },
   },
 
   zh: {
@@ -263,6 +268,11 @@ export const content = {
     },
     stickyCall: "电话咨询",
     logoAlt: "Future Mark Industrial Park 标志",
+    mascot: {
+      label: "FWM 吉祥物小箱",
+      hello: "你好！我是小箱，欢迎来到 FWM",
+      call: "有任何问题，欢迎来电！",
+    },
   },
 } as const;
 

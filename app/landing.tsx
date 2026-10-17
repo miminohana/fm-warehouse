@@ -1,6 +1,7 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { CONTACT, content, type Lang } from "./content";
+import Mascot from "./mascot";
 
 import heroBg from "@/public/images/hero-bg.webp";
 import building from "@/public/images/building.webp";
@@ -106,6 +107,9 @@ const serviceVisuals = [
 ];
 const FEATURED_SERVICE = 1;
 
+/** ลำดับเวลาของ animation ตอนเปิดหน้า (วินาที) */
+const delay = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
+
 /* ===== ส่วนประกอบ ===== */
 function Button({
   href,
@@ -139,7 +143,7 @@ function Button({
 
 function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
-    <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
+    <div className="reveal mx-auto mb-10 max-w-2xl text-center md:mb-14">
       <p className="mb-3 text-sm font-semibold tracking-wide text-brand-dark">{eyebrow}</p>
       <h2 className="text-title font-semibold text-balance text-navy">{title}</h2>
       {text && <p className="mt-4 text-muted">{text}</p>}
@@ -181,7 +185,7 @@ export default function Landing({ lang }: { lang: Lang }) {
           preload
           sizes="100vw"
           placeholder="blur"
-          className="object-cover opacity-35"
+          className="animate-slow-zoom object-cover opacity-35"
         />
         <div
           aria-hidden="true"
@@ -216,20 +220,22 @@ export default function Landing({ lang }: { lang: Lang }) {
           </div>
         </nav>
 
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-20 pt-6 md:grid-cols-2 md:pb-28 md:pt-12">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-24 pt-6 md:grid-cols-2 md:pb-32 md:pt-12">
           <div>
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm ring-1 ring-white/20">
+            <p className="animate-rise mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm ring-1 ring-white/20">
               <Icon className="h-4 w-4 text-accent">{icons.pin}</Icon>
               {t.hero.badge}
             </p>
-            <h1 className="text-display font-semibold">
+            <h1 className="animate-rise text-display font-semibold" style={delay(0.1)}>
               <Phrases parts={t.hero.line1} sep={t.sep} />
               <span className="block text-[#7cc4ee]">
                 <Phrases parts={t.hero.line2} sep={t.sep} />
               </span>
             </h1>
-            <p className="mt-5 max-w-xl text-lead text-white/80">{t.hero.lead}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="animate-rise mt-5 max-w-xl text-lead text-white/80" style={delay(0.2)}>
+              {t.hero.lead}
+            </p>
+            <div className="animate-rise mt-8 flex flex-col gap-3 sm:flex-row" style={delay(0.3)}>
               <Button href={telHref}>
                 <Icon className="h-5 w-5">{icons.phone}</Icon>
                 {t.hero.ctaCall}
@@ -240,7 +246,7 @@ export default function Landing({ lang }: { lang: Lang }) {
               </Button>
             </div>
           </div>
-          <div className="relative">
+          <div className="animate-rise relative" style={delay(0.25)}>
             <div className="overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ring-1 ring-white/15">
               <Image
                 src={building}
@@ -255,6 +261,19 @@ export default function Landing({ lang }: { lang: Lang }) {
               <Icon className="h-5 w-5 text-brand">{icons.land}</Icon>
               {t.hero.imageBadge}
             </p>
+            <div className="absolute -bottom-5 -right-1 z-10 w-24 sm:-right-4 sm:w-32 md:w-36">
+              <p
+                className="animate-pop absolute bottom-[88%] right-[70%] w-max max-w-[10.5rem] rounded-2xl rounded-br-sm bg-white px-3 py-2 text-xs font-semibold leading-snug text-navy shadow-xl sm:max-w-[13rem] sm:text-sm"
+                style={delay(1.1)}
+              >
+                {t.mascot.hello}
+              </p>
+              <Mascot
+                label={t.mascot.label}
+                className="animate-pop h-auto w-full drop-shadow-xl"
+                style={delay(0.8)}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -279,7 +298,7 @@ export default function Landing({ lang }: { lang: Lang }) {
             {t.highlights.map((h, i) => (
               <article
                 key={h.title}
-                className="rounded-2xl border border-border bg-white p-7 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/5"
+                className="reveal rounded-2xl border border-border bg-white p-7 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/5"
               >
                 <div className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-brand/10 text-brand">
                   <Icon>{highlightIcons[i]}</Icon>
@@ -293,7 +312,7 @@ export default function Landing({ lang }: { lang: Lang }) {
 
         {/* ===== ภาพจริงจากโครงการ ===== */}
         <section className="mx-auto max-w-6xl px-5 pb-20 md:pb-28">
-          <figure className="relative overflow-hidden rounded-3xl">
+          <figure className="reveal relative overflow-hidden rounded-3xl">
             <Image
               src={aerial}
               alt={t.aerial.imageAlt}
@@ -320,7 +339,7 @@ export default function Landing({ lang }: { lang: Lang }) {
                 return (
                   <article
                     key={s.name}
-                    className={`relative flex flex-col overflow-hidden rounded-2xl ${
+                    className={`reveal relative flex flex-col overflow-hidden rounded-2xl ${
                       featured
                         ? "bg-navy text-white shadow-2xl shadow-navy/30 md:-my-4"
                         : "border border-border bg-white"
@@ -383,7 +402,7 @@ export default function Landing({ lang }: { lang: Lang }) {
           <SectionHead {...t.testimonialsHead} />
           <div className="grid gap-5 md:grid-cols-2">
             {t.testimonials.map((r) => (
-              <figure key={r.who} className="rounded-2xl border border-border bg-white p-7 md:p-9">
+              <figure key={r.who} className="reveal rounded-2xl border border-border bg-white p-7 md:p-9">
                 <Icon className="h-9 w-9 text-brand">{icons.quote}</Icon>
                 <blockquote className="mt-4 text-lg text-ink">“{r.text}”</blockquote>
                 <figcaption className="mt-6 flex items-center gap-3">
@@ -409,7 +428,7 @@ export default function Landing({ lang }: { lang: Lang }) {
                 <details
                   key={f.q}
                   open={i === 0}
-                  className="group rounded-xl border border-border bg-white p-5 open:shadow-md open:shadow-navy/5 md:p-6"
+                  className="reveal group rounded-xl border border-border bg-white p-5 open:shadow-md open:shadow-navy/5 md:p-6"
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy [&::-webkit-details-marker]:hidden">
                     {f.q}
@@ -426,10 +445,20 @@ export default function Landing({ lang }: { lang: Lang }) {
 
         {/* ===== ติดต่อเรา ===== */}
         <section id="contact" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <div className="overflow-hidden rounded-3xl bg-navy text-white md:grid md:grid-cols-5">
+          <div className="reveal overflow-hidden rounded-3xl bg-navy text-white md:grid md:grid-cols-5">
             <div className="p-8 md:col-span-3 md:p-12">
-              <p className="mb-3 text-sm font-semibold tracking-wide text-[#7cc4ee]">{t.contact.eyebrow}</p>
-              <h2 className="text-title font-semibold text-balance">{t.contact.title}</h2>
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <p className="mb-3 text-sm font-semibold tracking-wide text-[#7cc4ee]">{t.contact.eyebrow}</p>
+                  <h2 className="text-title font-semibold text-balance">{t.contact.title}</h2>
+                </div>
+                <div className="flex shrink-0 flex-col items-center">
+                  <p className="mb-1 hidden rounded-xl bg-white px-3 py-1.5 text-xs font-semibold text-navy sm:block">
+                    {t.mascot.call}
+                  </p>
+                  <Mascot pose="phone" label={t.mascot.label} className="h-auto w-20 sm:w-28" />
+                </div>
+              </div>
               <p className="mt-4 text-white/75">{t.contact.text}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button href={telHref}>
