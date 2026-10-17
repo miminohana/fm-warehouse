@@ -184,11 +184,13 @@ function Button({
   children,
   variant = "primary",
   external,
+  className = "",
 }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "ghost" | "line" | "outline";
   external?: boolean;
+  className?: string;
 }) {
   const styles = {
     primary: "bg-accent text-navy hover:bg-accent-dark shadow-lg shadow-accent/25",
@@ -200,7 +202,7 @@ function Button({
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${styles}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${styles} ${className}`}
     >
       {children}
     </a>
@@ -210,8 +212,8 @@ function Button({
 function SectionHead({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
     <div className="mx-auto mb-10 max-w-2xl text-center md:mb-14">
-      <p className="mb-3 text-sm font-semibold tracking-wide text-brand">{eyebrow}</p>
-      <h2 className="text-title font-semibold text-navy">{title}</h2>
+      <p className="mb-3 text-sm font-semibold tracking-wide text-brand-dark">{eyebrow}</p>
+      <h2 className="text-title font-semibold text-balance text-navy">{title}</h2>
       {text && <p className="mt-4 text-muted">{text}</p>}
     </div>
   );
@@ -417,7 +419,7 @@ export default function Home() {
                     <p className="font-heading text-2xl font-semibold">สอบถามราคาพิเศษ</p>
                   </div>
                   <div className="mt-5">
-                    <Button href={telHref} variant={s.featured ? "primary" : "outline"}>
+                    <Button href={telHref} variant={s.featured ? "primary" : "outline"} className="w-full">
                       ขอใบเสนอราคา
                     </Button>
                   </div>
@@ -478,7 +480,7 @@ export default function Home() {
           <div className="overflow-hidden rounded-3xl bg-navy text-white md:grid md:grid-cols-5">
             <div className="p-8 md:col-span-3 md:p-12">
               <p className="mb-3 text-sm font-semibold tracking-wide text-[#7cc4ee]">ติดต่อเรา</p>
-              <h2 className="text-title font-semibold">นัดเยี่ยมชมโครงการ หรือขอใบเสนอราคา</h2>
+              <h2 className="text-title font-semibold text-balance">นัดเยี่ยมชมโครงการ หรือขอใบเสนอราคา</h2>
               <p className="mt-4 text-white/75">
                 คุยกับฝ่ายขายได้โดยตรง เราช่วยแนะนำพื้นที่ที่เหมาะกับธุรกิจ และทำราคาพิเศษให้คุณได้
               </p>
