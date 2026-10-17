@@ -57,3 +57,12 @@ h2,
 h3 {
   font-family: var(--font-heading);
 }
+
+/* หน้าภาษาจีน: ใช้ฟอนต์จีนก่อน ตัวไทย/อังกฤษใช้ฟอนต์เดิม */
+.lang-zh,
+.lang-zh h1,
+.lang-zh h2,
+.lang-zh h3,
+.lang-zh .font-heading {
+  font-family: var(--font-zh), var(--font-body), system-ui, sans-serif;
+}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans_Thai, Kanit } from "next/font/google";
+import { IBM_Plex_Sans_Thai, Kanit, Noto_Sans_SC } from "next/font/google";
+import { content, SITE_URL } from "./content";
 import "./globals.css";
 
 const body = IBM_Plex_Sans_Thai({
@@ -14,21 +15,32 @@ const head = Kanit({
   weight: ["500", "600", "700"],
 });
 
-const title = "FWM Future Mark Industrial Park | โกดัง โรงงาน ที่ดินให้เช่า มหาชัย สมุทรสาคร";
-const description =
-  "โกดัง คลังสินค้า โรงงาน และที่ดินเปล่าให้เช่า ขนาด 20–2,000 ตร.ม. สำหรับธุรกิจ SME ทำเลมหาชัย ใกล้กรุงเทพฯ รปภ. 24 ชม. ประสบการณ์กว่า 24 ปี";
+// ฟอนต์จีน: โหลดเฉพาะตอนมีตัวอักษรจีนบนหน้า (ไม่ preload ให้หน้าไทยช้า)
+const zh = Noto_Sans_SC({
+  variable: "--font-zh",
+  weight: ["400", "500", "700"],
+  preload: false,
+});
+
+const th = content.th.meta;
 
 export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    title,
-    description,
-    siteName: "FWM Future Mark Industrial Park",
-    locale: "th_TH",
-    type: "website",
+  metadataBase: new URL(SITE_URL),
+  title: th.title,
+  description: th.description,
+  alternates: {
+    canonical: "/",
+    languages: { th: "/", "zh-Hans": "/zh" },
   },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: {
+    title: th.title,
+    description: th.description,
+    siteName: "FWM Future Mark Industrial Park",
+    locale: th.locale,
+    type: "website",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image", title: th.title, description: th.description },
 };
 
 export const viewport: Viewport = {
@@ -37,7 +49,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="th" className={`${body.variable} ${head.variable} antialiased`}>
+    <html lang="th" className={`${body.variable} ${head.variable} ${zh.variable} antialiased`}>
       <body className="min-h-full font-sans">{children}</body>
     </html>
   );
